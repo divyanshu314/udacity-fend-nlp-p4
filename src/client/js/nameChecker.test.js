@@ -1,8 +1,8 @@
-import { validateUrl } from "../js/validateUrl";
+import { checkForName } from './nameChecker'
 
 describe('The function "checkForName()" should exist', () => {
     test('It should be defined', () => {
-        expect(validateUrl).toBeDefined();
+        expect(checkForName).toBeDefined();
     });
 
     test('The url should be valid, returns true if it is', () => {
@@ -15,7 +15,7 @@ describe('The function "checkForName()" should exist', () => {
         ];
 
         urls.forEach(url => {
-            expect(validateUrl(url)).toBeTruthy;
+            expect(checkForName(url)).toBeTruthy;
         });
     });
 
