@@ -23,7 +23,6 @@ app.use(express.static('dist'))
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
 console.log(__dirname)
 
 app.get('/', function (req, res) {
@@ -31,28 +30,25 @@ app.get('/', function (req, res) {
     //res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
-// designates what port the app will listen to for incoming requests
 app.listen(8081, function () {
     console.log('Example app listening on port 8081!')
+})
+
+app.post('/testing', async (req, res, next) => {
+    try {
+        var data = aylienapi.sentiment({
+            'text': req.body.query
+        }, function(err, response){
+            if (err === null){
+                console.log(response);
+                res.send(response);
+            }
+        });
+    } catch (error) {
+        return next(error);
+    }
 })
 
 app.get('/test', function (req, res) {
     res.send(mockAPIResponse)
 })
-
-// app.post('/sentiment-analysis', (req, res) => {
-//     textapi.sentiment({ url: req.body.url }, (error, result) => {
-//           if(error) {
-//             console.log('Error during Aylien request')
-//             res.send();
-//             return;
-//           }
-
-//           console.log('Got Aylien result')
-          
-//           res.send(result);
-//         })
-// })
-
-
-// module.exports = app;
